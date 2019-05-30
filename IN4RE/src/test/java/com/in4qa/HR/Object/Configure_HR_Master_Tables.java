@@ -196,7 +196,102 @@ public class Configure_HR_Master_Tables extends Configure_HR_Master_Tables_Tests
 		return relationshipName;
 	}
 	
+	@FindBy(id="CompanyName")
+	private WebElement companyName;
+	public WebElement getInsuranceCompanyName()
+	{
+		return companyName;
+	}
+	@FindBy(id="InsuranceCompanyId")
+	private WebElement insuranceCompanydropdown;
+	public WebElement getInsuranceCompanyDropDown()
+	{
+		return insuranceCompanydropdown;
+	}
 	
+	@FindBy(id="PolicyName")
+	private WebElement policyName;
+	public WebElement getInsurancePolicyName()
+	{
+		return policyName;
+	}
+	
+	@FindBy(id="BUName")
+	private WebElement businessUnitName;
+	public WebElement getBusinessUnitName()
+	{
+		return businessUnitName;
+	}
+	
+	@FindBy(id="BUDesciption")
+	private WebElement businessUnitDesciption;
+	public WebElement getBusinessUnitDesciption()
+	{
+		return businessUnitDesciption;
+	}
+	
+	@FindBy(id="ReasonCode")
+	private WebElement reasonCode;
+	public WebElement getExitReason()
+	{
+		return reasonCode;
+	}
+	
+	@FindBy(id="CodeDescription")
+	private WebElement reasonDescription;
+	public WebElement getReasonDescription()
+	{
+		return reasonDescription;
+	}
+	
+	@FindBy(id="AirlinesName")
+	private WebElement airlinesName;
+	public WebElement getAirlinesName()
+	{
+		return airlinesName;
+	}
+	
+	@FindBy(id="RankId")
+	private WebElement rankId;
+	public WebElement getCorporateRankDropDown()
+	{
+		return rankId;
+	}
+	
+	@FindBy(id="GradeId")
+	private WebElement gradeId;
+	public WebElement getCorporateGradeDropDown()
+	{
+		return gradeId;
+	}
+	
+	@FindBy(id="CorporateTitleName")
+	private WebElement corporateTitleName;
+	public WebElement getCorporateTitleName()
+	{
+		return corporateTitleName;
+	}
+	
+	@FindBy(id="InstituteName")
+	private WebElement instituteName;
+	public WebElement getInstituteName()
+	{
+		return instituteName;
+	}
+	
+	@FindBy(id="CarTypeName")
+	private WebElement carTypeName;
+	public WebElement getCarTypeName()
+	{
+		return carTypeName;
+	}
+	
+	@FindBy(id="CarTypeDesc")
+	private WebElement carTypeDesc;
+	public WebElement getCarTypeDesc()
+	{
+		return carTypeDesc;
+	}
 	public boolean isMasterNotPresent(String strName) throws Exception
 	{
 		int  flag=0, size =0; String strText=null;
@@ -527,7 +622,277 @@ public class Configure_HR_Master_Tables extends Configure_HR_Master_Tables_Tests
 			return false;
 		}
 	}
-
-
-
+	
+	
+	public boolean create_Insurance_Company_master(int i)
+	{
+		try
+		{
+			mainMenu.clickHR();
+			hrSubMenu.clickConfigureHR();
+			hr_master_table.clickMasterTablesLink();
+			Frames.rightFrame();
+			appInd.selectDropDown(hr_master_table.getMasterTablesDropDown(), "Insurance Company");
+			appInd.selectDropDown(hr_master_table.getStatusDropDown(), "Active");
+			appInd.clickObject(hr_master_table.getGoButton());
+			appInd.selectDropDown(hr_master_table.getDisplayItemPerPage(), "--All--");
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Insurance Company"+i)))
+			{
+				appInd.clickObject(hr_master_table.getAddNew());
+				Frames.iFrame();
+				appInd.setObject(hr_master_table.getInsuranceCompanyName(), hrmap.get("Insurance Company"+i));
+				appInd.clickObject(hr_master_table.getSubmitButton());	
+			}
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Insurance Company"+i)))
+			{
+				return false;
+			} else
+			{
+				return true;
+			}	
+		} catch(Exception e)
+		{
+			appInd.captureScreenShot();
+			return false;
+		}
+	}
+	
+	public boolean create_Insurance_Policy_Detail_master(int i)
+	{
+		try
+		{
+			mainMenu.clickHR();
+			hrSubMenu.clickConfigureHR();
+			hr_master_table.clickMasterTablesLink();
+			Frames.rightFrame();
+			appInd.selectDropDown(hr_master_table.getMasterTablesDropDown(), "Insurance Policy Detail");
+			appInd.selectDropDown(hr_master_table.getStatusDropDown(), "Active");
+			appInd.clickObject(hr_master_table.getGoButton());
+			appInd.selectDropDown(hr_master_table.getDisplayItemPerPage(), "--All--");
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Insurance Policy Detail"+i)))
+			{
+				appInd.clickObject(hr_master_table.getAddNew());
+				Frames.iFrame();
+			    appInd.selectDropDown(hr_master_table.getInsuranceCompanyDropDown(), hrmap.get("Insurance Company"+i));
+			    appInd.setObject(hr_master_table.getInsurancePolicyName(), hrmap.get("Insurance Policy Detail"+i));
+				appInd.clickObject(hr_master_table.getSubmitButton());	
+			}
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Insurance Policy Detail"+i)))
+			{
+				return false;
+			} else
+			{
+				return true;
+			}	
+		} catch(Exception e)
+		{
+			appInd.captureScreenShot();
+			return false;
+		}
+	}
+	
+	public boolean create_Business_Unit_Master(int i)
+	{
+		try
+		{
+			mainMenu.clickHR();
+			hrSubMenu.clickConfigureHR();
+			hr_master_table.clickMasterTablesLink();
+			Frames.rightFrame();
+			appInd.selectDropDown(hr_master_table.getMasterTablesDropDown(), "Business Unit Master");
+			appInd.selectDropDown(hr_master_table.getStatusDropDown(), "Active");
+			appInd.clickObject(hr_master_table.getGoButton());
+			appInd.selectDropDown(hr_master_table.getDisplayItemPerPage(), "--All--");
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Business Unit Master"+i)))
+			{
+				appInd.clickObject(hr_master_table.getAddNew());
+				Frames.iFrame();
+			   appInd.setObject(hr_master_table.getBusinessUnitName(), hrmap.get("Business Unit Name"+i));
+			   appInd.setObject(hr_master_table.getBusinessUnitDesciption(), hrmap.get("Business Unit Description"+i));
+			   appInd.clickObject(hr_master_table.getSubmitButton());	
+			}
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Business Unit Master"+i)))
+			{
+				return false;
+			} else
+			{
+				return true;
+			}	
+		} catch(Exception e)
+		{
+			appInd.captureScreenShot();
+			return false;
+		}
+	}
+	
+	public boolean create_Exit_Reason_Master(int i)
+	{
+		try
+		{
+			mainMenu.clickHR();
+			hrSubMenu.clickConfigureHR();
+			hr_master_table.clickMasterTablesLink();
+			Frames.rightFrame();
+			appInd.selectDropDown(hr_master_table.getMasterTablesDropDown(), "Exit Reason");
+			appInd.selectDropDown(hr_master_table.getStatusDropDown(), "Active");
+			appInd.clickObject(hr_master_table.getGoButton());
+			appInd.selectDropDown(hr_master_table.getDisplayItemPerPage(), "--All--");
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Exit Reason"+i)))
+			{
+				appInd.clickObject(hr_master_table.getAddNew());
+				Frames.iFrame();
+				appInd.setObject(hr_master_table.getExitReason() , hrmap.get("Exit Reason"+i));
+			    appInd.setObject(hr_master_table.getReasonDescription(), hrmap.get("Exit Reason Description"+i));
+			    appInd.clickObject(hr_master_table.getSubmitButton());	
+			}
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Exit Reason"+i)))
+			{
+				return false;
+			} else
+			{
+				return true;
+			}	
+		} catch(Exception e)
+		{
+			appInd.captureScreenShot();
+			return false;
+		}
+	}
+	
+	public boolean create_Air_Lines_Master(int i)
+	{
+		try
+		{
+			mainMenu.clickHR();
+			hrSubMenu.clickConfigureHR();
+			hr_master_table.clickMasterTablesLink();
+			Frames.rightFrame();
+			appInd.selectDropDown(hr_master_table.getMasterTablesDropDown(), "Air Lines");
+			appInd.selectDropDown(hr_master_table.getStatusDropDown(), "Active");
+			appInd.clickObject(hr_master_table.getGoButton());
+			appInd.selectDropDown(hr_master_table.getDisplayItemPerPage(), "--All--");
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Airlines Name"+i)))
+			{
+				appInd.clickObject(hr_master_table.getAddNew());
+				Frames.iFrame();
+				appInd.setObject(hr_master_table.getAirlinesName(), hrmap.get("Airlines Name"+i));
+			    appInd.clickObject(hr_master_table.getSubmitButton());	
+			}
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Airlines Name"+i)))
+			{
+				return false;
+			} else
+			{
+				return true;
+			}	
+		} catch(Exception e)
+		{
+			appInd.captureScreenShot();
+			return false;
+		}
+	}
+	
+	public boolean create_Corporate_Titles_Master(int i)
+	{
+		try
+		{
+			mainMenu.clickHR();
+			hrSubMenu.clickConfigureHR();
+			hr_master_table.clickMasterTablesLink();
+			Frames.rightFrame();
+			appInd.selectDropDown(hr_master_table.getMasterTablesDropDown(), "Corporate Titles");
+			appInd.selectDropDown(hr_master_table.getStatusDropDown(), "Active");
+			appInd.clickObject(hr_master_table.getGoButton());
+			appInd.selectDropDown(hr_master_table.getDisplayItemPerPage(), "--All--");
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Corporate Titles"+i)))
+			{
+				appInd.clickObject(hr_master_table.getAddNew());
+				Frames.iFrame();
+				appInd.selectDropDown(hr_master_table.getCorporateRankDropDown(), hrmap.get("Corporate Rank"+i));
+				appInd.selectDropDown(hr_master_table.getCorporateGradeDropDown(), hrmap.get("Corporate Grade"+i));
+				appInd.setObject(hr_master_table.getCorporateTitleName(), hrmap.get("CorporateTitleName"+i));
+			    appInd.clickObject(hr_master_table.getSubmitButton());	
+			    
+			}
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Corporate Titles"+i)))
+			{
+				return false;
+			} else
+			{
+				return true;
+			}	
+		} catch(Exception e)
+		{
+			appInd.captureScreenShot();
+			return false;
+		}
+	}
+	
+	public boolean create_Institute_Name_Master(int i)
+	{
+		try
+		{
+			mainMenu.clickHR();
+			hrSubMenu.clickConfigureHR();
+			hr_master_table.clickMasterTablesLink();
+			Frames.rightFrame();
+			appInd.selectDropDown(hr_master_table.getMasterTablesDropDown(), "Institute Name");
+			appInd.selectDropDown(hr_master_table.getStatusDropDown(), "Active");
+			appInd.clickObject(hr_master_table.getGoButton());
+			appInd.selectDropDown(hr_master_table.getDisplayItemPerPage(), "--All--");
+			if(hr_master_table.isMasterNotPresent(hrmap.get("InstituteName"+i)))
+			{
+				appInd.clickObject(hr_master_table.getAddNew());
+				Frames.iFrame();
+				appInd.setObject(hr_master_table.getInstituteName(), hrmap.get("InstituteName"+i));
+			    appInd.clickObject(hr_master_table.getSubmitButton());	
+			    
+			}
+			if(hr_master_table.isMasterNotPresent(hrmap.get("InstituteName"+i)))
+			{
+				return false;
+			} else
+			{
+				return true;
+			}	
+		} catch(Exception e)
+		{
+			appInd.captureScreenShot();
+			return false;
+		}
+	}
+	
+	public boolean create_Car_Types_Master(int i)
+	{
+		try
+		{
+			mainMenu.clickHR();
+			hrSubMenu.clickConfigureHR();
+			hr_master_table.clickMasterTablesLink();
+			Frames.rightFrame();
+			appInd.selectDropDown(hr_master_table.getMasterTablesDropDown(), "Car Types");
+			appInd.selectDropDown(hr_master_table.getStatusDropDown(), "Active");
+			appInd.clickObject(hr_master_table.getGoButton());
+			appInd.selectDropDown(hr_master_table.getDisplayItemPerPage(), "--All--");
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Corporate Titles"+i)))
+			{
+				appInd.clickObject(hr_master_table.getAddNew());
+				Frames.iFrame();
+				appInd.setObject(hr_master_table.getCarTypeName(), hrmap.get("Car Type Name"+i));
+				appInd.setObject(hr_master_table.getCarTypeDesc(), hrmap.get("Car Type Description"+i));
+			    appInd.clickObject(hr_master_table.getSubmitButton());	   
+			}
+			if(hr_master_table.isMasterNotPresent(hrmap.get("Corporate Titles"+i)))
+			{
+				return false;
+			} else
+			{
+				return true;
+			}	
+		} catch(Exception e)
+		{
+			appInd.captureScreenShot();
+			return false;
+		}
+	}
 }
