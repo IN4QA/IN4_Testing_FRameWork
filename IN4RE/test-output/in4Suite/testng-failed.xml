@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [in4Suite]">
+  <listeners>
+    <listener class-name="methods.Reporting"/>
+  </listeners>
+  <test name="testing">
+    <classes>
+      <class name="testScripts.Login">
+        <methods>
+          <include name="loginTest"/>
+        </methods>
+      </class> <!-- testScripts.Login -->
+      <class name="com.in4qa.FINANCE.Tests.Configure_CompanyDetailsTests">
+        <methods>
+          <include name="CreateCompany"/>
+        </methods>
+      </class> <!-- com.in4qa.FINANCE.Tests.Configure_CompanyDetailsTests -->
+    </classes>
+  </test> <!-- testing -->
+  <test name="testing(failed)">
+    <classes>
+      <class name="testScripts.Login">
+        <methods>
+          <include name="endTest"/>
+          <include name="preRequisite"/>
+          <include name="loadClassFiles"/>
+        </methods>
+      </class> <!-- testScripts.Login -->
+      <class name="com.in4qa.FINANCE.Tests.Configure_CompanyDetailsTests">
+        <methods>
+          <include name="preRequisite"/>
+          <include name="CreateCompany"/>
+        </methods>
+      </class> <!-- com.in4qa.FINANCE.Tests.Configure_CompanyDetailsTests -->
+    </classes>
+  </test> <!-- testing(failed) -->
+</suite> <!-- Failed suite [in4Suite] -->
