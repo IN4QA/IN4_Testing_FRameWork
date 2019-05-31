@@ -213,6 +213,14 @@ import methods.Frames;
 		{
 			return nexButton;
 		}
+		
+		@FindBy(id ="btnAdditionalInfo")
+		private WebElement indentAdditionalInfo;
+		public WebElement indentAdditionalInfo()
+		{
+			return indentAdditionalInfo;
+		}
+		
 		public void click_Indent() throws Exception
 		{
 			Frames.leftFrame();
