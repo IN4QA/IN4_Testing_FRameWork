@@ -23,6 +23,7 @@ import baseClasses.HRSubMenu;
 import baseClasses.HomeSubMenu;
 import baseClasses.LandSubMenu;
 import baseClasses.MainMenu;
+import baseClasses.PurchaseSubMenu;
 import methods.AppDependentMethods;
 import methods.AppIndependentMethods;
 import methods.Datatable;
@@ -48,6 +49,7 @@ public class DriverScript {
 	public static LandSubMenu landSubMenu;
 	public static FinanceSubMenu financeSubMenu;
 	public static HRSubMenu hrSubMenu;
+	public static PurchaseSubMenu  purchaseSubMenu;
 	/************************************
 	 * Method Name	: loadClassFiles()
 	 * Purpose		: to create Object to all class files
