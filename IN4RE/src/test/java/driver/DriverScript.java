@@ -12,12 +12,12 @@ import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import baseClasses.FinanceSubMenu;
 import baseClasses.HRSubMenu;
 import baseClasses.HomeSubMenu;
@@ -37,7 +37,7 @@ public class DriverScript {
 	public static Datatable datatable;
 	public static LoginPage lgnpage;
 	public static String menuName;
-	public static WebDriverWait w2;
+	public static WebDriverWait w2;// after click on open implementation showing showing page not found
 	public static String strReportFile;
 	public static Map omap;
 	public static XMLUtility utility;
@@ -50,6 +50,7 @@ public class DriverScript {
 	public static FinanceSubMenu financeSubMenu;
 	public static HRSubMenu hrSubMenu;
 	public static PurchaseSubMenu  purchaseSubMenu;
+
 	/************************************
 	 * Method Name	: loadClassFiles()
 	 * Purpose		: to create Object to all class files
@@ -117,8 +118,9 @@ public class DriverScript {
 			oBrowser= appDep.launchBrowser(strBrowser);
 			appDep.navigateToApp();
 			mainMenu = new MainMenu(oBrowser);
-			homeSubMenu = new HomeSubMenu(oBrowser);
-			financeSubMenu = new FinanceSubMenu(oBrowser);
+			//homeSubMenu = new HomeSubMenu(oBrowser);
+			purchaseSubMenu= new PurchaseSubMenu(oBrowser);
+			//financeSubMenu = new FinanceSubMenu(oBrowser);
 			hrSubMenu = new HRSubMenu(oBrowser);
 		    w2= new WebDriverWait(oBrowser,60);
 			utility.createXml();

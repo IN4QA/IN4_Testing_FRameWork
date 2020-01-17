@@ -21,7 +21,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import driver.DriverScript;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 
@@ -426,6 +425,7 @@ public class AppIndependentMethods extends DriverScript{
 				System.out.println("Exception while zipping the folder");
 			}
 		}
+	
 	 public  void clickObject(WebElement element) throws Exception
 	 {
 		 ((JavascriptExecutor) oBrowser).executeScript("arguments[0].click();", w2.until(ExpectedConditions.elementToBeClickable(element)));
@@ -485,6 +485,12 @@ public class AppIndependentMethods extends DriverScript{
         	 appInd.selectDropDown(yearObj, strYear);
         	 w2.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(date))).click();
          }
+
+
+		public void clickObject(Object sendKeys) {
+			// TODO Auto-generated method stub
+			
+		}
          
          
          

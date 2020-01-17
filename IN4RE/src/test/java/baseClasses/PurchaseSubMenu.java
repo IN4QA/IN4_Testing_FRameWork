@@ -24,9 +24,24 @@ public class PurchaseSubMenu extends DriverScript
 		return inventory;
 	}
 	
+	@FindBy(partialLinkText ="Purchase Orders")
+	private WebElement PurchaseOrders;
+	public WebElement getPurchaseOrders()
+	{
+		return PurchaseOrders;
+	}
+	
+	
 	public void clickInventory() throws Exception
 	{
 		Frames.SubMenuFrame();
 		appInd.clickObject(purchaseSubMenu.getInventory());
 	}
+	
+/*	public void clickPurchaseOrder() throws Exception
+	{
+		Frames.SubMenuFrame();
+		appInd.clickObject(purchaseSubMenu.getPurchaseOrders());
+	}*/
+	
 }

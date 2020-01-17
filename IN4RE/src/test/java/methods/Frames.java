@@ -63,6 +63,7 @@ public class Frames extends DriverScript
 		try
 		{
 			oBrowser.switchTo().defaultContent();
+			System.out.println("submenu:"+oBrowser.findElements(By.cssSelector("frame[name='submenuFrame']")).size());
 			  if(oBrowser.findElements(By.cssSelector("frame[name='submenuFrame']")).size()>0)
 			  {
 			w2.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("submenuFrame"));
@@ -123,7 +124,7 @@ public class Frames extends DriverScript
 	{
 		try
 		{
-			mainFrame();
+			mainFrame();			
 			if(oBrowser.findElements(By.cssSelector("frame[name='rightframe']")).size()>0)
 			{
 			w2.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("rightframe"));
@@ -156,8 +157,7 @@ public class Frames extends DriverScript
 		try
 		{
 			mainFrame();
-			
-			if(oBrowser.findElements(By.cssSelector("frame[name='frameLeft']")).size()>0)
+			if(oBrowser.findElements(By.cssSelector("frame[id='frameLeft']")).size()>0)
 			{
 			w2.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("frameLeft"));
 			return true;

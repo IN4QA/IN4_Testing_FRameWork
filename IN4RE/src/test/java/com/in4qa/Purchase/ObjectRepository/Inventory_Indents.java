@@ -1,11 +1,8 @@
 package com.in4qa.Purchase.ObjectRepository;
 
-
-
-
-
-	import java.util.Iterator;
+import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.By;
 	import org.openqa.selenium.WebDriver;
@@ -15,12 +12,10 @@ import org.openqa.selenium.By;
 	import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.in4qa.Purchase.Tests.Inventory_Indents_tests;
+import com.sun.jna.platform.win32.OaIdl.SYSKIND;
 
 import methods.Frames;
 
-
-
- 
 	public class Inventory_Indents extends Inventory_Indents_tests
 	{
 		WebDriver iDriver;
@@ -37,12 +32,13 @@ import methods.Frames;
 			return indents;
 	    }
 		
-		@FindBy(xpath="//*[@id='btnCreate']")
+		@FindBy(xpath="//*[@id='btnCreate']") // create Indent/PO
 		private WebElement CreateIndents;
 		public WebElement getCreateIndents()
 		{
 			return CreateIndents;
 	    }
+		
 		
 		@FindBy(xpath="//*[@id='rdbMainIndentType_0']")
 		private WebElement Indents_WithWorkOrder;
@@ -221,13 +217,51 @@ import methods.Frames;
 			return indentAdditionalInfo;
 		}
 		
+		@FindBy(id ="txtWorlOrder")
+		private WebElement WoOrder;
+		public WebElement WoOrder()
+		{
+			return WoOrder;
+		}
+		
+		@FindBy(id ="btnClose")           // close Wo order
+		private WebElement WOBtnClose;
+		public WebElement WOBtnClose()
+		{
+			return WOBtnClose;
+		}
+		
+		@FindBy(id ="btnSearch")  // search Wo Order
+		private WebElement WOSearch;
+		public WebElement WOSearch()
+		{
+			return WOSearch;
+		}
+		
+		@FindBy(id ="dvWorkOrderGrid_ctl03_rdSelect")  // select radio button
+		private WebElement SelectWO;
+		public WebElement SelectWO()
+		{
+			return SelectWO;
+		}
+		
+
+		@FindBy(partialLinkText ="Accept Selected") // Wo accept select link
+		private WebElement WoAcceptSelected;
+		public WebElement getWoAcceptSelected()
+		{
+			return WoAcceptSelected;
+		}
+		
 		public void click_Indent() throws Exception
 		{
 			Frames.leftFrame();
 			appInd.clickObject(indentsObj.getIndentLink());
 		}
 		
-		public boolean selectWorkOrder(int k) throws InterruptedException
+		
+		public boolean selectWorkOrder(int k) throws Throwable
+	
 		{
 			
 			    int flag=0;
@@ -238,15 +272,31 @@ import methods.Frames;
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		
 				Iterator<String> it = oBrowser.getWindowHandles().iterator();
 	        	String strParent = it.next();
 	        	String strchild = it.next();
 	        	oBrowser.switchTo().window(strchild);
-				Thread.sleep(1000);
-				int pageNo = w2.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//table[@id='dvWorkOrderGrid_ctl01_PagerTable']/tbody/tr[2]/td[3]/a"))).size();
+	        	//check if you are able to get into the child window because it is not able to find any element in child window..	        
+				Thread.sleep(1000);	
+				appInd.clickObject(indentsObj.WoOrder);
+				WoOrder.sendKeys("Wor-8998989898/425232/19-20/Dec/AP Contractors/2019-20/Dec/23");
+				appInd.clickObject(indentsObj.WOSearch);
+				appInd.clickObject(indentsObj.SelectWO);
+				appInd.clickObject(indentsObj.WoAcceptSelected);
+				//appInd.clickObject(indentsObj.WOBtnClose);
+				oBrowser.switchTo().window(strParent);
+				Frames.rightFrame();
+				return true;
+			
+			
+				
+		}
+				/*int pageNo = w2.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//table[@id='dvWorkOrderGrid_ctl01_PagerTable']/tbody/tr[2]/td[3]/a"))).size();
 				for(int j=2; j<=pageNo; j++)
-				{
-					int size = w2.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//table[@id='dvWorkOrderGrid']/tbody/tr"))).size();
+				{ 
+
+					int size = w2.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//table[@id='dvWrkOrderGrid']/tbody/tr"))).size();
 					for(int i=3; i<=size; i++)
 					{
 						 String strText =w2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='in4-table']/tbody/tr["+i+"]/td[2]"))).getText();
@@ -255,7 +305,7 @@ import methods.Frames;
 							 w2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='in4-table']/tbody/tr["+i+"]/td[1]"))).click();
 							 try {
 								appInd.clickObject(indentsObj.getAcceptSelected());
-							} catch (Exception e) {
+							} catch (TimeoutException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							} 
@@ -263,8 +313,8 @@ import methods.Frames;
 							 break;
 						 }
 					}
-					
-					if(flag==1)
+					*/
+					/*if(flag==1)
 					{
 						oBrowser.switchTo().window(strParent);
 						Frames.rightFrame();
@@ -279,11 +329,7 @@ import methods.Frames;
 				{
 					return false;
 				}			
-		}
-		
-		
-
-	
+		}*/
 		
 		@FindBy(xpath="//*[@id ='rdoIndentStatusList_0']")
 		private WebElement search_Indent_UnfulfilledPOTO;
@@ -439,12 +485,70 @@ import methods.Frames;
 		{
 			return indent_Calender_Month;
 		}
-		
 		@FindBy(css="select[title='Change the year']")
 		private WebElement indent_Calender_Month_Year;
 		public WebElement getIndent_Calender_Month_Year()
 		{
 			return indent_Calender_Month_Year;
+		}
+		
+		@FindBy(id="btnMasterLevel") // add material button on mm in indent
+		private WebElement MaterilMaster;
+		public WebElement getMaterilMaster()
+		{
+			return MaterilMaster;
+		}
+		
+		@FindBy(id="btnIndentAddItem") // add material button after click on mm button in indent
+		private WebElement AddMateril;
+		public WebElement getAddMateril()
+		{
+			return AddMateril;
+		}
+		
+		@FindBy(id="ddlMaterialType") // select material type
+		private WebElement MaterilType;
+		public WebElement getMaterilType()
+		{
+			return MaterilType;
+		}
+		
+
+		@FindBy(id="ddlMaterialSubtype") // select material sub type
+		private WebElement MaterilSubType;
+		public WebElement getMaterilSubType()
+		{
+			return MaterilSubType;
+		}
+		
+
+		@FindBy(id="ddlMaterial") // select material sub type
+		private WebElement MaterilName;
+		public WebElement getMaterilName()
+		{
+			return MaterilName;
+		}
+		
+		@FindBy(id="btnSearch") // select material sub type
+		private WebElement Search;
+		public WebElement getSearch()
+		{
+			return Search;
+		}
+		
+
+		@FindBy(id="gvMaterialResult_ctl02_chkAll") // select All material 
+		private WebElement ChkBoxAllMaterial;
+		public WebElement getChkBoxAllMaterial()
+		{
+			return ChkBoxAllMaterial;
+		}
+		
+		@FindBy(id="lnkAcceptedSelected") // Acept selected  link in Material add page
+		private WebElement AcceptSelectedLink;
+		public WebElement getAcceptSelectedLink()
+		{
+			return AcceptSelectedLink;
 		}
 		public void create_Indent_WithWorkOrder(int i)
 		{
@@ -465,18 +569,31 @@ import methods.Frames;
 					
 				}
 				appInd.selectDropDown(indentsObj.getIndents_TypeOfIndent(), purmap.get("Type of Indent"+i));
+				Thread.sleep(200);
 				appInd.selectDropDown(indentsObj.getIndents_Project(),purmap.get("Project"+i));
+				Thread.sleep(200);
 		        appInd.selectDropDown(indentsObj.getIndents_SubProject(),purmap.get("SubProject"+i));
-		        if( indentsObj.selectWorkOrder(i))
-		        {
-		        	
-		        	appInd.clickOnCalender(indentsObj.getIndent_Calender(),indentsObj.getIndent_Calender_Month(), purmap.get("month"+i), indentsObj.getIndent_Calender_Month_Year(), purmap.get("year"+i),purmap.get("date"+i));
-		        	appInd.clickObject(indentsObj.getIndents_Create());
-		        	
-		        }		
+		        Thread.sleep(200);
+		        try {
+					if( indentsObj.selectWorkOrder(i))
+					{
+						Thread.sleep(500);
+						appInd.clickOnCalender(indentsObj.getIndent_Calender(),indentsObj.getIndent_Calender_Month(), purmap.get("month"+i), indentsObj.getIndent_Calender_Month_Year(), purmap.get("year"+i),purmap.get("date"+i));
+						appInd.clickObject(indentsObj.getIndents_Create());
+						
+					}
+				} catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+		        appInd.clickObject(indentsObj.getMaterilMaster());
+		        appInd.clickObject(indentsObj.getAddMateril());
+		        appInd.selectDropDown(indentsObj.getMaterilType(),purmap.get("Materil Type"+ i));
+		        
+		        
 			}catch(Exception e)
 			{
-				
+			System.out.println(e);
 			}
 		}
 		
