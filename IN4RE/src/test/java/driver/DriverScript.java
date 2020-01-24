@@ -37,7 +37,7 @@ public class DriverScript {
 	public static Datatable datatable;
 	public static LoginPage lgnpage;
 	public static String menuName;
-	public static WebDriverWait w2;// after click on open implementation showing showing page not found
+	public static WebDriverWait w2;
 	public static String strReportFile;
 	public static Map omap;
 	public static XMLUtility utility;

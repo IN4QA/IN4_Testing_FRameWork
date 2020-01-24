@@ -1,5 +1,4 @@
 package methods;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
@@ -23,14 +22,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import driver.DriverScript;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
-
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -426,6 +421,8 @@ public class AppIndependentMethods extends DriverScript{
 			}
 		}
 	
+	
+	 
 	 public  void clickObject(WebElement element) throws Exception
 	 {
 		 ((JavascriptExecutor) oBrowser).executeScript("arguments[0].click();", w2.until(ExpectedConditions.elementToBeClickable(element)));
@@ -436,8 +433,6 @@ public class AppIndependentMethods extends DriverScript{
 		 } catch(Exception e) {};
 		  		   
 	}
-	 
-	 
 	 public boolean clickObject(By by)
 	 {
 		 try {
@@ -465,12 +460,14 @@ public class AppIndependentMethods extends DriverScript{
         	 }
          }
          public  void selectDropDown(WebElement oEl, String strText) throws Exception
-     	{
+     	{    
         	 Select osel = null;
-        	 w2.until(ExpectedConditions.visibilityOf(oEl));
+        	 w2.until(ExpectedConditions.visibilityOf(oEl));//code not working
         	 osel = new Select(oEl);
         	 osel.selectByVisibleText(strText);	
      	}
+     	
+         
          
          public void setObject(WebElement element, String strData) 
          {
@@ -486,6 +483,7 @@ public class AppIndependentMethods extends DriverScript{
         	 w2.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(date))).click();
          }
 
+       
 
 		public void clickObject(Object sendKeys) {
 			// TODO Auto-generated method stub

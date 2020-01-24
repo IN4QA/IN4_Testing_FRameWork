@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.openqa.selenium.By;
 	import org.openqa.selenium.WebDriver;
 	import org.openqa.selenium.WebElement;
@@ -258,79 +259,6 @@ import methods.Frames;
 			Frames.leftFrame();
 			appInd.clickObject(indentsObj.getIndentLink());
 		}
-		
-		
-		public boolean selectWorkOrder(int k) throws Throwable
-	
-		{
-			
-			    int flag=0;
-				try {
-					appInd.clickObject(indentsObj.getIndent_WorkOrder_Select());
-					
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		
-				Iterator<String> it = oBrowser.getWindowHandles().iterator();
-	        	String strParent = it.next();
-	        	String strchild = it.next();
-	        	oBrowser.switchTo().window(strchild);
-	        	//check if you are able to get into the child window because it is not able to find any element in child window..	        
-				Thread.sleep(1000);	
-				appInd.clickObject(indentsObj.WoOrder);
-				WoOrder.sendKeys("Wor-8998989898/425232/19-20/Dec/AP Contractors/2019-20/Dec/23");
-				appInd.clickObject(indentsObj.WOSearch);
-				appInd.clickObject(indentsObj.SelectWO);
-				appInd.clickObject(indentsObj.WoAcceptSelected);
-				//appInd.clickObject(indentsObj.WOBtnClose);
-				oBrowser.switchTo().window(strParent);
-				Frames.rightFrame();
-				return true;
-			
-			
-				
-		}
-				/*int pageNo = w2.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//table[@id='dvWorkOrderGrid_ctl01_PagerTable']/tbody/tr[2]/td[3]/a"))).size();
-				for(int j=2; j<=pageNo; j++)
-				{ 
-
-					int size = w2.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//table[@id='dvWrkOrderGrid']/tbody/tr"))).size();
-					for(int i=3; i<=size; i++)
-					{
-						 String strText =w2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='in4-table']/tbody/tr["+i+"]/td[2]"))).getText();
-						 if(strText.equals(purmap.get("workOrderNo"+k)))
-						 {
-							 w2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@class='in4-table']/tbody/tr["+i+"]/td[1]"))).click();
-							 try {
-								appInd.clickObject(indentsObj.getAcceptSelected());
-							} catch (TimeoutException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} 
-							 flag=1;
-							 break;
-						 }
-					}
-					*/
-					/*if(flag==1)
-					{
-						oBrowser.switchTo().window(strParent);
-						Frames.rightFrame();
-						break;
-					}
-					w2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@id='dvWorkOrderGrid_ctl01_PagerTable']/tbody/tr[2]/td[3]/a["+j+"]"))).click();
-				}
-				if(flag==1)
-				{
-					return true;
-				} else
-				{
-					return false;
-				}			
-		}*/
-		
 		@FindBy(xpath="//*[@id ='rdoIndentStatusList_0']")
 		private WebElement search_Indent_UnfulfilledPOTO;
 		public WebElement getSearch_Indent_UnfulfilledPOTO()
@@ -472,13 +400,19 @@ import methods.Frames;
 			return search_Indent_TypeOf_Indent;
 		}
 		
-		@FindBy(id="dtIndentDate_txtDatePicker")
+		@FindBy(id="dtIndentDate_txtDatePicker")   
 		private WebElement indent_Calender;
 		public WebElement getIndent_Calender()
 		{
 			return indent_Calender;
 		}
 		
+		@FindBy(id="gvIndentItem_ctl02_dtItemDate_txtDatePicker")  
+		private WebElement indent_Calender1;
+		public WebElement getIndent_Calender1()
+		{
+			return indent_Calender1;
+		}
 		@FindBy(css="select[title='Change the month']")
 		private WebElement indent_Calender_Month;
 		public WebElement getIndent_Calender_Month()
@@ -529,7 +463,7 @@ import methods.Frames;
 			return MaterilName;
 		}
 		
-		@FindBy(id="btnSearch") // select material sub type
+		@FindBy(id="btnSearch") // 
 		private WebElement Search;
 		public WebElement getSearch()
 		{
@@ -537,19 +471,160 @@ import methods.Frames;
 		}
 		
 
-		@FindBy(id="gvMaterialResult_ctl02_chkAll") // select All material 
+		@FindBy(id="gvMaterialResult_ctl02_chkAll") // select All material in Search material Page.
 		private WebElement ChkBoxAllMaterial;
 		public WebElement getChkBoxAllMaterial()
 		{
 			return ChkBoxAllMaterial;
 		}
-		
-		@FindBy(id="lnkAcceptedSelected") // Acept selected  link in Material add page
-		private WebElement AcceptSelectedLink;
-		public WebElement getAcceptSelectedLink()
+
+		@FindBy(id="txtMaterialSearch") // search material 
+		private WebElement SearchMaterial;
+		public WebElement getSearchMaterial()
 		{
-			return AcceptSelectedLink;
+			return SearchMaterial;
 		}
+		
+		@FindBy(id="gvIndentItem_ctl02_ddlItemStore") // select store
+		private WebElement Store;
+		public WebElement getStore()
+		{
+			return Store;
+		}
+		
+		@FindBy(id="chkIndentAllItems") // chk all material in Add indent material page.
+		private WebElement chkIndentAllItems;
+		public WebElement getchkIndentAllItems()
+		{
+			return chkIndentAllItems;
+		}
+		
+		@FindBy(id="btnAutoFill") // Autofill date
+		private WebElement AutoFilldate;
+		public WebElement getAutoFilldate()
+		{
+			return AutoFilldate;
+		}
+		
+		@FindBy(id="gvIndentItem_ctl02_txtItemQuantity") // 
+		private WebElement MaterialQty;
+		public WebElement getMaterialQty()
+		{
+			return MaterialQty;
+		}
+		
+		@FindBy(id="BtnAddItem") // 
+		private WebElement AddMaterialMM;
+		public WebElement getAddMaterialMM()
+		{
+			return AddMaterialMM;
+		}
+		
+		@FindBy(id="dtAutoFillDate_txtDatePicker") // 
+		private WebElement CalenderMM;
+		public WebElement getCalenderMM()
+		{
+			return CalenderMM;
+		}
+		
+		
+		
+		@FindBy(css="select[title='Change the month']")
+		private WebElement CalenderMM_Month;
+		public WebElement getCalenderMM_Month()
+		{
+			return CalenderMM_Month;
+		
+		}
+		
+		@FindBy(xpath="/html/body/div/div/div[2]/div/div/select[2]")
+		private WebElement CalenderMM_Year;
+		public WebElement getCalenderMM_Year()
+		{
+			return CalenderMM_Year;
+		}
+		
+		@FindBy(id="lnkChangeStatus") // 
+		private WebElement ChangeStatus_Indent;
+		public WebElement getChangeStatus_Indent()
+		{
+			return ChangeStatus_Indent;
+		}
+		
+		@FindBy(id="ddlUpdateStatusList") // 
+		private WebElement ChangeStatus_DropDown;
+		public WebElement getChangeStatus_DropDown()
+		{
+			return ChangeStatus_DropDown;
+		}
+		
+		
+//******************Script 4r Select WO***********************************************
+		public boolean selectWorkOrder(int k) throws Throwable
+	
+		{
+			
+			    int flag=0;
+				try {
+					appInd.clickObject(indentsObj.getIndent_WorkOrder_Select());
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
+				Iterator<String> it = oBrowser.getWindowHandles().iterator();
+	        	String strParent = it.next();
+	        	String strchild = it.next();
+	        	oBrowser.switchTo().window(strchild);        
+				Thread.sleep(1000);	
+				appInd.clickObject(indentsObj.WoOrder);
+				WoOrder.sendKeys("Wor-8998989898/425232/19-20/Dec/AP Contractors/2019-20/Dec/23");
+				appInd.clickObject(indentsObj.WOSearch);
+				appInd.clickObject(indentsObj.SelectWO);
+				appInd.clickObject(indentsObj.WoAcceptSelected);
+				//appInd.clickObject(indentsObj.WOBtnClose);
+				oBrowser.switchTo().window(strParent);
+				Frames.rightFrame();
+				return true;
+				
+		}
+		
+//********************Select Material from Material Master**********************
+		
+		public boolean selectMaterialfromMaterialMaster(int l) throws Throwable
+		
+		{
+			  
+				appInd.clickObject(indentsObj.getMaterilMaster());
+		        appInd.clickObject(indentsObj.getAddMateril());
+		        Iterator<String> it = oBrowser.getWindowHandles().iterator();
+	        	String strParent = it.next();
+	        	String strchild = it.next();
+	        	oBrowser.switchTo().window(strchild);
+		        appInd.selectDropDown(indentsObj.getMaterilType(),purmap.get("Materil Type"+ l));
+		        Thread.sleep(200);
+		       /* appInd.selectDropDown(indentsObj.getMaterilSubType(),purmap.get("Material Sub Type"+ l));
+		        Thread.sleep(200);
+		        appInd.selectDropDown(indentsObj.getMaterilName(),purmap.get("Material "+ l));*/
+		        appInd.clickObject(indentsObj.getSearch());
+		        Search.sendKeys("SearchMaterial");
+		        appInd.clickObject(indentsObj.getChkBoxAllMaterial());
+ 		        appInd.clickObject(indentsObj.getAcceptSelected());
+ 		        oBrowser.switchTo().window(strParent);
+				Frames.rightFrame();
+				appInd.selectDropDown(indentsObj.getStore(),purmap.get("Store"+l));
+				Thread.sleep(200);
+				appInd.clickObject(indentsObj.MaterialQty);
+				MaterialQty.clear();
+				MaterialQty.sendKeys("5");
+				appInd.clickOnCalender(indentsObj.getIndent_Calender1(),indentsObj.getIndent_Calender_Month(), purmap.get("month"+l),indentsObj.getIndent_Calender_Month_Year(), purmap.get("year"+l),purmap.get("date"+l));
+				appInd.clickObject(indentsObj.getAutoFilldate());
+				appInd.clickObject(indentsObj.getchkIndentAllItems());
+                return true;
+              
+		}
+		
 		public void create_Indent_WithWorkOrder(int i)
 		{
 			try
@@ -586,11 +661,28 @@ import methods.Frames;
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}	
-		        appInd.clickObject(indentsObj.getMaterilMaster());
-		        appInd.clickObject(indentsObj.getAddMateril());
-		        appInd.selectDropDown(indentsObj.getMaterilType(),purmap.get("Materil Type"+ i));
 		        
 		        
+		        try {
+		        	if(indentsObj.selectMaterialfromMaterialMaster(i))
+		        	{
+		        		appInd.clickObject(indentsObj.getAddMaterialMM());
+		        	}
+		        	
+		        	
+		        } catch (Throwable e) {
+					
+					e.printStackTrace();
+				}	
+		        
+		        Iterator<String> it = oBrowser.getWindowHandles().iterator();
+	        	String strParent = it.next();
+	        	oBrowser.switchTo().window(strParent);
+	        	Frames.rightFrame();
+	        	appInd.clickObject(indentsObj.getChangeStatus_Indent());
+	        	appInd.selectDropDown(indentsObj.getChangeStatus_DropDown(),purmap.get("Indent Status"+i));
+	        	
+             
 			}catch(Exception e)
 			{
 			System.out.println(e);
