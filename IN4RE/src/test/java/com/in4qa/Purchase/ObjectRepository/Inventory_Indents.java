@@ -558,7 +558,41 @@ import methods.Frames;
 			return ChangeStatus_DropDown;
 		}
 		
+		@FindBy(id="lnkUpdateStatus") 
+		private WebElement UpdateStatus;
+		public WebElement getUpdateStatus()
+		{
+			return UpdateStatus;
+		}
 		
+
+		@FindBy(id="btnBOQLevel") 
+		private WebElement BOQ_Level;
+		public WebElement getBOQ_Level()
+		{
+			return BOQ_Level;
+		}
+		
+		@FindBy(id="btnFilterGO") 
+		private WebElement Search_BOQ_MM;
+		public WebElement getSearch_BOQ_MM()
+		{
+			return Search_BOQ_MM;
+		}
+		
+		@FindBy(id="btnExpandAll") 
+		private WebElement ExpandAll;
+		public WebElement getExpandAll()
+		{
+			return ExpandAll;
+		}
+		
+		@FindBy(id="gvMaterialDetail_ctl03_gvBOQDetail_ctl03_txtCurrentQty") 
+		private WebElement CurrentIndent_Qty;
+		public WebElement getCurrentIndent_Qty()
+		{
+			return CurrentIndent_Qty;
+		}
 //******************Script 4r Select WO***********************************************
 		public boolean selectWorkOrder(int k) throws Throwable
 	
@@ -618,12 +652,35 @@ import methods.Frames;
 				appInd.clickObject(indentsObj.MaterialQty);
 				MaterialQty.clear();
 				MaterialQty.sendKeys("5");
+				appInd.clickObject(indentsObj.getIndent_Calender1());
+				Thread.sleep(500);
 				appInd.clickOnCalender(indentsObj.getIndent_Calender1(),indentsObj.getIndent_Calender_Month(), purmap.get("month"+l),indentsObj.getIndent_Calender_Month_Year(), purmap.get("year"+l),purmap.get("date"+l));
 				appInd.clickObject(indentsObj.getAutoFilldate());
 				appInd.clickObject(indentsObj.getchkIndentAllItems());
                 return true;
               
 		}
+		//---------------------------------Select Material from_BOQ_______________________
+	
+		public boolean selectMaterialfrom_BOQLevel(int l) throws Throwable 
+		{
+			appInd.clickObject(indentsObj.getBOQ_Level());
+			appInd.clickObject(indentsObj.getAddMateril());
+			Iterator<String> it = oBrowser.getWindowHandles().iterator();
+        	String strParent = it.next();
+        	String strchild = it.next();
+        	oBrowser.switchTo().window(strchild);
+        	appInd.clickObject(indentsObj.getSearch_BOQ_MM());
+        	appInd.clickObject(indentsObj.getExpandAll());
+        	CurrentIndent_Qty.clear();
+        	appInd.setObject(indentsObj.getCurrentIndent_Qty(),purmap.get("Current_Indent_Qty"+l));
+        	appInd.clickObject(indentsObj.getAcceptSelected());
+			return true;
+			
+		}
+		
+		
+		
 		
 		public void create_Indent_WithWorkOrder(int i)
 		{
@@ -668,6 +725,11 @@ import methods.Frames;
 		        	{
 		        		appInd.clickObject(indentsObj.getAddMaterialMM());
 		        	}
+		
+		        	if(indentsObj.selectMaterialfrom_BOQLevel(i))
+		        	{
+		        			
+		        	}
 		        	
 		        	
 		        } catch (Throwable e) {
@@ -681,6 +743,7 @@ import methods.Frames;
 	        	Frames.rightFrame();
 	        	appInd.clickObject(indentsObj.getChangeStatus_Indent());
 	        	appInd.selectDropDown(indentsObj.getChangeStatus_DropDown(),purmap.get("Indent Status"+i));
+	        	appInd.clickObject(indentsObj.getUpdateStatus());
 	        	
              
 			}catch(Exception e)
