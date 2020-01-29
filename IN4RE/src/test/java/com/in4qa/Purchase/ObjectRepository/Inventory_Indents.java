@@ -912,7 +912,7 @@ import methods.Frames;
 		        Frames.rightFrame();
 		        appInd.clickObject(indentsObj.getCreate());
 		        try
-			    { 	
+			     { 	
 			        if(indentsObj.SelectMaterialfromMaterialMaster(i))
 				       {
 				         appInd.clickObject(indentsObj.getAddMaterialMM());
