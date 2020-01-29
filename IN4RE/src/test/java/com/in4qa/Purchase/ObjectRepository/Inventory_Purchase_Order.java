@@ -1,12 +1,13 @@
 package com.in4qa.Purchase.ObjectRepository;
 
 import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
+import driver.DriverScript;
 import com.in4qa.Purchase.Tests.Inventory_Purchase_Order_Test;
-
+import baseClasses.PurchaseSubMenu;
 import methods.Frames;
 
 public class Inventory_Purchase_Order extends Inventory_Purchase_Order_Test
@@ -151,36 +152,124 @@ public class Inventory_Purchase_Order extends Inventory_Purchase_Order_Test
 		return  PO_Calender;
 	}
 	
+	@FindBy(css="select[title='Change the month']")
+	private WebElement PO_Calender_Month;
+	public WebElement getPO_Calender_Month()
+	{
+		return PO_Calender_Month;
+	}
+	
+	@FindBy(css="select[title='Change the year']")
+	private WebElement PO_Calender_Year;
+	public WebElement getPO_Calender_Year()
+	{
+		return PO_Calender_Year;
+	}
 	
 	
+	@FindBy(id="frmViewPOIndent_lnkSupplier")
+	private WebElement Select_Supplier;
+	public WebElement getSelect_Supplier()
+	{
+		return Select_Supplier;
+	}
 	
 	
-	public void Create_Purchase_Order_DomesticType(int i)
+	@FindBy(id="gdvSupplierList_ctl05_lnkSupplierName")
+	private WebElement AddSupplier;
+	public WebElement getAddSupplier()
+	{
+		return AddSupplier;
+	}
+    
+	@FindBy(id="frmViewPOIndent_lnkAddIndent")
+	private WebElement AddIndent;
+	public WebElement getAddIndent()
+	{
+		return AddIndent;
+	}
+	
+	@FindBy(id="ddlSubProject")
+	private WebElement SubProject;
+	public WebElement getSubProject()
+	{
+		return SubProject;
+	}
+	
+	@FindBy(id="btnFilterGO")
+	private WebElement Search;
+	public WebElement getSearch()
+	{
+		return Search;
+	}
+	
+	
+	@FindBy(id="gvIndentList_ctl02_chkBoxIndent")
+	private WebElement SelectIndentChkBox;
+	public WebElement getSelectIndentChkBox()
+	{
+		return SelectIndentChkBox;
+	}
+	
+	@FindBy(id="lnkAcceptSelected")
+	private WebElement AceeptSelected;
+	public WebElement getAceeptSelected()
+	{
+		return AceeptSelected;
+	}
+	
+	@FindBy(id="btnCreate")
+	private WebElement PO_Create;
+	public WebElement getPO_Create()
+	{
+		return PO_Create;
+	}
+	
+
+	@FindBy(partialLinkText ="Purchase Orders")
+	private WebElement PurchaseOrders;
+	public WebElement getPurchaseOrders()
+	{
+		return PurchaseOrders;
+	}
+	//---------------------Create Domestic Type PO----------------
+	public void Create_Purchase_Order_DomesticType(int i) 
 	{
 		try
 		{
 			mainMenu.clickPurchase();
 			purchaseSubMenu.clickInventory();
-			PurchaseObj.clickPurchaseOrder();
+			Frames.leftFrame();
+			appInd.clickObject(PurchaseObj.getPurchaseOrders());
 			Frames.rightFrame();
-			//appInd.clickObject(PurchaseObj.getCreatePurchase_order());
+			appInd.clickObject(PurchaseObj.getCreatePurchase_order());
 			appInd.clickObject(PurchaseObj.getPO_Category_Material());
 			appInd.selectDropDown(PurchaseObj.getPO_Project(),purmap.get("Project")+i);
 			appInd.selectDropDown(PurchaseObj.getPO_Type(),purmap.get("PO Type")+i);
-		//	appInd.clickOnCalender(PurchaseObj.getPO_date(), PurchaseObj.get, strMonth, yearObj, strYear, date);
+		    appInd.clickOnCalender(PurchaseObj.getPO_date(),PurchaseObj.getPO_Calender_Month(), purmap.get("month"+i),PurchaseObj.getPO_Calender_Year(), purmap.get("year"+i),purmap.get("date"+i));
+			Thread.sleep(200);
+			appInd.clickObject(PurchaseObj.getSelect_Supplier());
+			appInd.clickObject(PurchaseObj.getAddSupplier());
+			appInd.clickObject(PurchaseObj.getAddIndent());
+			appInd.selectDropDown(PurchaseObj.getSubProject(),purmap.get("SubProject"+i));
+			appInd.clickObject(PurchaseObj.getSearch());
+			appInd.clickObject(PurchaseObj.getSelectIndentChkBox());
+			appInd.clickObject(PurchaseObj.getAceeptSelected());
+			appInd.clickObject(PurchaseObj.getPO_Create());
 			
+					
+				
+				
+		}
+				
+			  
 			
-			
-			
-			
-       }
 		catch(Exception e)
 		{}
 }
 
 
 
-	private void clickPurchaseOrder() {
-		// TODO Auto-generated method stub
+	
 		
-	}}
+	}

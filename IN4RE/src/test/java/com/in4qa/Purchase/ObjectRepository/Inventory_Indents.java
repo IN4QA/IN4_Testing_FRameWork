@@ -551,14 +551,14 @@ import methods.Frames;
 			return ChangeStatus_Indent;
 		}
 		
-		@FindBy(id="ddlUpdateStatusList") // 
+		@FindBy(id="ddlUpdateStatusList") // lnkChangeStatus
 		private WebElement ChangeStatus_DropDown;
 		public WebElement getChangeStatus_DropDown()
 		{
 			return ChangeStatus_DropDown;
 		}
 		
-		@FindBy(id="lnkUpdateStatus") 
+		@FindBy(id="lnkUpdateStatus") //
 		private WebElement UpdateStatus;
 		public WebElement getUpdateStatus()
 		{
@@ -593,43 +593,144 @@ import methods.Frames;
 		{
 			return CurrentIndent_Qty;
 		}
-//******************Script 4r Select WO***********************************************
-		public boolean selectWorkOrder(int k) throws Throwable
-	
+		
+		@FindBy(id="gvIndentItem_ctl02_lnkViewMatterialAttributes") 
+		private WebElement Add_Attributes;
+		public WebElement getAdd_Attributes()
 		{
-			
+			return Add_Attributes;
+		}
+		
+		@FindBy(id="lnkBtnAddCategoryRow") 
+		private WebElement AddRow;
+		public WebElement getAddRow()
+		{
+			return AddRow;
+		}
+		
+		@FindBy(id="gvAttributeCategoryList_ctl02_ddlAttributeCategory") 
+		private WebElement Attribute_Category;
+		public WebElement getAttribute_Category()
+		{
+			return Attribute_Category;
+		}
+		
+		@FindBy(id="gvAttributeCategoryList_ctl02_ddlAttributeItems") 
+		private WebElement Attribute_Name;
+		public WebElement getAttribute_Name()
+		{
+			return Attribute_Name;
+		}
+		
+
+		@FindBy(id="gvAttributeCategoryList_ctl02_txtQuantity") 
+		private WebElement Attribute_Quantity;
+		public WebElement getAttribute_Quantity()
+		{
+			return Attribute_Quantity;
+		}
+		
+		@FindBy(id="lnkAcceptAttributes") 
+		private WebElement Submit;
+		public WebElement getSubmit()
+		{
+			return Submit;
+		}
+		
+		@FindBy(id="gvIndentItem_ctl02_ImgItemDeliveryScheduleExpand") 
+		private WebElement DeliverySchedule;
+		public WebElement getDeliverySchedule()
+		{
+			return DeliverySchedule;
+		}
+		
+
+		@FindBy(id="gvIndentItem_ctl02_gvIndentItemDeliverySchedule_ctl02_dtDeliveryScheduleDate_txtDatePicker") 
+		private WebElement Calendar_DeliverySchedule;
+		public WebElement getCalendar_DeliverySchedule()
+		{
+			return Calendar_DeliverySchedule;
+		}
+		
+		@FindBy(id="gvIndentItem_ctl02_gvIndentItemDeliverySchedule_ctl01_chkAllDeliverySchedule") 
+		private WebElement SelectChkbox;
+		public WebElement getSelectChkbox()
+		{
+			return SelectChkbox;
+		}
+		
+		@FindBy(id="rdbMainIndentType_1") 
+		private WebElement WithoutWO;
+		public WebElement getWithoutWO()
+		{
+			return WithoutWO;
+		}
+		
+		@FindBy(id="lnkAddNewBOQs") 
+		private WebElement AddNewBOQ;
+		public WebElement getAddNewBOQ()
+		{
+			return AddNewBOQ;
+		}
+		
+		@FindBy(id="btnFilterGO") 
+		private WebElement GoButton;
+		public WebElement getGoButton()
+		{
+			return GoButton;
+		}
+		
+		@FindBy(id="chkAll") 
+		private WebElement chkbox;
+		public WebElement getchkbox()
+		{
+			return chkbox;
+		}
+		
+		@FindBy(id="btnAddBoqs") 
+		private WebElement AddBoq;
+		public WebElement getAddBoq()
+		{
+			return AddBoq;
+		}
+		
+
+		@FindBy(id="btnCreate") 
+		private WebElement Create;
+		public WebElement getCreate()
+		{
+			return Create;
+		}
+//***************************Select Work Order***********************************************
+		public boolean selectWorkOrder(int k) throws Throwable
+		{		
 			    int flag=0;
 				try {
-					appInd.clickObject(indentsObj.getIndent_WorkOrder_Select());
-					
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					appInd.clickObject(indentsObj.getIndent_WorkOrder_Select());			
+				    } 
+				catch (Exception e)
+				    {
 					e.printStackTrace();
-				}
-		
+				    }	
 				Iterator<String> it = oBrowser.getWindowHandles().iterator();
 	        	String strParent = it.next();
 	        	String strchild = it.next();
 	        	oBrowser.switchTo().window(strchild);        
 				Thread.sleep(1000);	
 				appInd.clickObject(indentsObj.WoOrder);
-				WoOrder.sendKeys("Wor-8998989898/425232/19-20/Dec/AP Contractors/2019-20/Dec/23");
+				//WoOrder.sendKeys("Wor-8998989898/425232/19-20/Dec/AP Contractors/2019-20/Dec/23");
 				appInd.clickObject(indentsObj.WOSearch);
 				appInd.clickObject(indentsObj.SelectWO);
 				appInd.clickObject(indentsObj.WoAcceptSelected);
-				//appInd.clickObject(indentsObj.WOBtnClose);
 				oBrowser.switchTo().window(strParent);
 				Frames.rightFrame();
-				return true;
-				
+				return true;	
 		}
 		
 //********************Select Material from Material Master**********************
 		
-		public boolean selectMaterialfromMaterialMaster(int l) throws Throwable
-		
+		public boolean SelectMaterialfromMaterialMaster(int l) throws Throwable
 		{
-			  
 				appInd.clickObject(indentsObj.getMaterilMaster());
 		        appInd.clickObject(indentsObj.getAddMateril());
 		        Iterator<String> it = oBrowser.getWindowHandles().iterator();
@@ -638,9 +739,6 @@ import methods.Frames;
 	        	oBrowser.switchTo().window(strchild);
 		        appInd.selectDropDown(indentsObj.getMaterilType(),purmap.get("Materil Type"+ l));
 		        Thread.sleep(200);
-		       /* appInd.selectDropDown(indentsObj.getMaterilSubType(),purmap.get("Material Sub Type"+ l));
-		        Thread.sleep(200);
-		        appInd.selectDropDown(indentsObj.getMaterilName(),purmap.get("Material "+ l));*/
 		        appInd.clickObject(indentsObj.getSearch());
 		        Search.sendKeys("SearchMaterial");
 		        appInd.clickObject(indentsObj.getChkBoxAllMaterial());
@@ -649,38 +747,63 @@ import methods.Frames;
 				Frames.rightFrame();
 				appInd.selectDropDown(indentsObj.getStore(),purmap.get("Store"+l));
 				Thread.sleep(200);
-				appInd.clickObject(indentsObj.MaterialQty);
+				//appInd.clickObject(indentsObj.MaterialQty);
 				MaterialQty.clear();
-				MaterialQty.sendKeys("5");
+				Thread.sleep(100);
+				MaterialQty.sendKeys("2");
+				/*appInd.clickObject(indentsObj.getAdd_Attributes());
+				oBrowser.switchTo().window(strchild);
+				appInd.clickObject(indentsObj.getAddRow());
+				appInd.selectDropDown(indentsObj.getAdd_Attributes(),purmap.get("Attribute Category"+l));
+				appInd.selectDropDown(indentsObj.getAttribute_Name(),purmap.get("Attribute Name	"+l));
+				Attribute_Quantity.clear();
+				Attribute_Quantity.sendKeys("5");
+				appInd.clickObject(indentsObj.getSubmit());*/
 				appInd.clickObject(indentsObj.getIndent_Calender1());
 				Thread.sleep(500);
 				appInd.clickOnCalender(indentsObj.getIndent_Calender1(),indentsObj.getIndent_Calender_Month(), purmap.get("month"+l),indentsObj.getIndent_Calender_Month_Year(), purmap.get("year"+l),purmap.get("date"+l));
-				appInd.clickObject(indentsObj.getAutoFilldate());
+				appInd.clickObject(indentsObj.getDeliverySchedule());
+				Thread.sleep(200);
+				appInd.clickOnCalender(indentsObj.getCalendar_DeliverySchedule(),indentsObj.getIndent_Calender_Month(),purmap.get("month"+l),indentsObj.getIndent_Calender_Month_Year(), purmap.get("year"+l),purmap.get("date"+l));
+		       // appInd.clickObject(indentsObj.getAutoFilldate());
+				appInd.clickObject(indentsObj.getSelectChkbox());
 				appInd.clickObject(indentsObj.getchkIndentAllItems());
-                return true;
-              
+                return true;           
 		}
-		//---------------------------------Select Material from_BOQ_______________________
+		//---------------------------------Select Material from_BOQ------------------------------------
 	
-		public boolean selectMaterialfrom_BOQLevel(int l) throws Throwable 
+		public boolean SelectMaterialfrom_BOQLevel(int l) throws Throwable 
 		{
-			appInd.clickObject(indentsObj.getBOQ_Level());
-			appInd.clickObject(indentsObj.getAddMateril());
-			Iterator<String> it = oBrowser.getWindowHandles().iterator();
-        	String strParent = it.next();
-        	String strchild = it.next();
-        	oBrowser.switchTo().window(strchild);
-        	appInd.clickObject(indentsObj.getSearch_BOQ_MM());
-        	appInd.clickObject(indentsObj.getExpandAll());
-        	CurrentIndent_Qty.clear();
-        	appInd.setObject(indentsObj.getCurrentIndent_Qty(),purmap.get("Current_Indent_Qty"+l));
-        	appInd.clickObject(indentsObj.getAcceptSelected());
-			return true;
-			
+			   appInd.clickObject(indentsObj.getBOQ_Level());
+			   appInd.clickObject(indentsObj.getAddMateril());
+			   Iterator<String> it = oBrowser.getWindowHandles().iterator();
+        	   String strParent = it.next();
+        	   String strchild = it.next();
+        	   oBrowser.switchTo().window(strchild);
+        	   Thread.sleep(500);
+        	   appInd.clickObject(indentsObj.getSearch_BOQ_MM());
+        	   appInd.clickObject(indentsObj.getExpandAll());
+        	   CurrentIndent_Qty.clear();
+        	   Thread.sleep(200);
+         	   appInd.setObject(indentsObj.getCurrentIndent_Qty(),purmap.get("Current_Indent_Qty"+l));
+        	   appInd.clickObject(indentsObj.getAcceptSelected());
+               oBrowser.switchTo().window(strParent);
+			   Frames.rightFrame();
+			   appInd.selectDropDown(indentsObj.getStore(),purmap.get("Store"+l));
+			   Thread.sleep(200);
+			   appInd.clickObject(indentsObj.getIndent_Calender1());
+			   Thread.sleep(500);
+			   appInd.clickOnCalender(indentsObj.getIndent_Calender1(),indentsObj.getIndent_Calender_Month(), purmap.get("month"+l),indentsObj.getIndent_Calender_Month_Year(), purmap.get("year"+l),purmap.get("date"+l));
+			   appInd.clickObject(indentsObj.getDeliverySchedule());
+			   Thread.sleep(200);
+			   appInd.clickOnCalender(indentsObj.getCalendar_DeliverySchedule(),indentsObj.getIndent_Calender_Month(),purmap.get("month"+l),indentsObj.getIndent_Calender_Month_Year(), purmap.get("year"+l),purmap.get("date"+l));
+			   appInd.clickObject(indentsObj.getSelectChkbox());
+			  // appInd.clickObject(indentsObj.getAutoFilldate());
+			   appInd.clickObject(indentsObj.getchkIndentAllItems());
+            return true;	
 		}
 		
-		
-		
+		//---------------------------------Create Indent Without Work Order------------------------	
 		
 		public void create_Indent_WithWorkOrder(int i)
 		{
@@ -690,100 +813,137 @@ import methods.Frames;
 				purchaseSubMenu.clickInventory();
 				indentsObj.click_Indent();
 				Frames.rightFrame();
+				
 				appInd.clickObject(indentsObj.getCreateIndents());
 				if(datatable.getCellData(strFile, "Create Indent", "Material", i).equalsIgnoreCase("yes"))
-				{
-					appInd.clickObject(indentsObj.getIndents_CategoryMateriyal());
-					
-				}else
-				{
-					appInd.clickObject(indentsObj.getIndents_CategoryAsset());
-					
-				}
+				    {
+					appInd.clickObject(indentsObj.getIndents_CategoryMateriyal());			
+				    }
+				else
+				    {
+					appInd.clickObject(indentsObj.getIndents_CategoryAsset());		
+				    }
 				appInd.selectDropDown(indentsObj.getIndents_TypeOfIndent(), purmap.get("Type of Indent"+i));
 				Thread.sleep(200);
 				appInd.selectDropDown(indentsObj.getIndents_Project(),purmap.get("Project"+i));
 				Thread.sleep(200);
 		        appInd.selectDropDown(indentsObj.getIndents_SubProject(),purmap.get("SubProject"+i));
 		        Thread.sleep(200);
-		        try {
-					if( indentsObj.selectWorkOrder(i))
+		    try 
+		    {
+				if( indentsObj.selectWorkOrder(i))
 					{
-						Thread.sleep(500);
-						appInd.clickOnCalender(indentsObj.getIndent_Calender(),indentsObj.getIndent_Calender_Month(), purmap.get("month"+i), indentsObj.getIndent_Calender_Month_Year(), purmap.get("year"+i),purmap.get("date"+i));
-						appInd.clickObject(indentsObj.getIndents_Create());
-						
+     				  Thread.sleep(500);
+					  appInd.clickOnCalender(indentsObj.getIndent_Calender(),indentsObj.getIndent_Calender_Month(), purmap.get("month"+i), indentsObj.getIndent_Calender_Month_Year(), purmap.get("year"+i),purmap.get("date"+i));
+					  appInd.clickObject(indentsObj.getIndents_Create());		
 					}
-				} catch (Throwable e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}	
+			} 
+		    catch (Throwable e)
+            {
+			e.printStackTrace();
+			}	       
+		    try
+		    { 	
+		        if(indentsObj.SelectMaterialfromMaterialMaster(i))
+			       {
+			         appInd.clickObject(indentsObj.getAddMaterialMM());
+			       }       	
+		       /* if(indentsObj.SelectMaterialfrom_BOQLevel(i))
+		           {
+		        	 appInd.clickObject(indentsObj.getAddMaterialMM());		
+		           }	*/ 	
+		    } 
+		    catch (Throwable e) 
+		    {
+			e.printStackTrace();
+			}	
 		        
-		        
-		        try {
-		        	if(indentsObj.selectMaterialfromMaterialMaster(i))
-		        	{
-		        		appInd.clickObject(indentsObj.getAddMaterialMM());
-		        	}
-		
-		        	if(indentsObj.selectMaterialfrom_BOQLevel(i))
-		        	{
-		        			
-		        	}
-		        	
-		        	
-		        } catch (Throwable e) {
-					
-					e.printStackTrace();
-				}	
-		        
-		        Iterator<String> it = oBrowser.getWindowHandles().iterator();
-	        	String strParent = it.next();
-	        	oBrowser.switchTo().window(strParent);
-	        	Frames.rightFrame();
-	        	appInd.clickObject(indentsObj.getChangeStatus_Indent());
-	        	appInd.selectDropDown(indentsObj.getChangeStatus_DropDown(),purmap.get("Indent Status"+i));
-	        	appInd.clickObject(indentsObj.getUpdateStatus());
-	        	
+		    Iterator<String> it = oBrowser.getWindowHandles().iterator();
+	        String strParent = it.next();
+	        oBrowser.switchTo().window(strParent);
+	        Frames.rightFrame();
+	        appInd.clickObject(indentsObj.getChangeStatus_Indent());
+	        appInd.selectDropDown(indentsObj.getChangeStatus_DropDown(),purmap.get("Indent Status"+i));
+	        appInd.clickObject(indentsObj.getUpdateStatus());
+	        Thread.sleep(200);
+	        appInd.clickObject(indentsObj.getChangeStatus_Indent());
+	        appInd.selectDropDown(indentsObj.getChangeStatus_DropDown(),purmap.get("Indent Status1"+i));
+	        appInd.clickObject(indentsObj.getUpdateStatus());
              
 			}catch(Exception e)
 			{
 			System.out.println(e);
 			}
 		}
-		
+	//---------------------Create Indent Without Work Order--------------------------------------	
 		public void create_Indent_Without_Worklorder(int i)
 		{
-			try {
+		 try 
+		    {
 				mainMenu.clickPurchase();
 				purchaseSubMenu.clickInventory();
 				indentsObj.click_Indent();
 				Frames.rightFrame();
 				appInd.clickObject(indentsObj.getCreateIndents());
+				appInd.clickObject(indentsObj.getWithoutWO());
 				if(datatable.getCellData(strFile, "Create Indent", "Material", i).equalsIgnoreCase("yes"))
-				{
-					appInd.clickObject(indentsObj.getIndents_CategoryMateriyal());
-					
-				}else
-				{
+				 {
+					appInd.clickObject(indentsObj.getIndents_CategoryMateriyal());	
+				 }
+				else
+				 {
 					appInd.clickObject(indentsObj.getIndents_CategoryAsset());
-				}
+				 }
+				Thread.sleep(600);
 				appInd.selectDropDown(indentsObj.getIndents_TypeOfIndent(), purmap.get("Type of Indent"+i));
 				appInd.selectDropDown(indentsObj.getIndents_Project(),purmap.get("Project"+i));
 		        appInd.selectDropDown(indentsObj.getIndents_SubProject(),purmap.get("SubProject"+i));
-		        appInd.clickOnCalender(indentsObj.getIndent_Calender(), indentsObj.getIndent_Calender_Month(), purmap.get("month"+i), indentsObj.getIndent_Calender_Month_Year(),purmap.get("year"+i), purmap.get("date"+i));
+		        appInd.clickOnCalender(indentsObj.getIndent_Calender(), indentsObj.getIndent_Calender_Month(), purmap.get("month"+i), indentsObj.getIndent_Calender_Month_Year(),purmap.get("year"+i), purmap.get("date"+i));     
+			    appInd.clickObject(indentsObj.getAddNewBOQ());
+			    Iterator<String> it = oBrowser.getWindowHandles().iterator();
+			    String strParent = it.next();
+			    String strChild = it.next();
+		        oBrowser.switchTo().window(strChild);
+			    Thread.sleep(200);
+		        appInd.clickObject(indentsObj.getGoButton());
+		        appInd.clickObject(indentsObj.getchkbox());
+		        appInd.clickObject(indentsObj.getAddBoq());
+		        oBrowser.switchTo().window(strParent);
+		        Frames.rightFrame();
+		        appInd.clickObject(indentsObj.getCreate());
+		        try
+			    { 	
+			        if(indentsObj.SelectMaterialfromMaterialMaster(i))
+				       {
+				         appInd.clickObject(indentsObj.getAddMaterialMM());
+				       }       	
+			        if(indentsObj.SelectMaterialfrom_BOQLevel(i))
+			           {
+			        	 appInd.clickObject(indentsObj.getAddMaterialMM());		
+			           } 	
+			    } 
+			    catch (Throwable e) 
+			    {
+				e.printStackTrace();
+				}	
+		        oBrowser.switchTo().window(strParent);
+		        Frames.rightFrame();
+		        appInd.clickObject(indentsObj.getChangeStatus_Indent());
+		        Thread.sleep(200);
+		        appInd.selectDropDown(indentsObj.getChangeStatus_DropDown(),purmap.get("Indent Status"+i));
+		        appInd.clickObject(indentsObj.getUpdateStatus());
+		        appInd.clickObject(indentsObj.getChangeStatus_Indent());
+		        Thread.sleep(200);
+		        appInd.selectDropDown(indentsObj.getChangeStatus_DropDown(),purmap.get("Indent Status1"+i));
+		        appInd.clickObject(indentsObj.getUpdateStatus());
+	             
 		    
-	
-		       
-			} catch (Exception e) {
-				
-				
+		    }  
+		 catch (Exception e) 
+		    {
+			 System.out.println(e);
 			}
-			
-			
 		}
-		
-		
 	}
 	
 		

@@ -25,8 +25,10 @@ public static Inventory_Indents indentsObj = null;
 			rows  = datatable.getRowNum(strFile, "Create Indent");
 			for(int i=1; i<=rows; i++)
 			{
-			indentsObj.create_Indent_WithWorkOrder(i);
+		//	indentsObj.create_Indent_WithWorkOrder(i);
+			indentsObj.create_Indent_Without_Worklorder(i);
 			}
+			
 			
 		}catch(Exception e)
 		{
