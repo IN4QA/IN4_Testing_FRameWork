@@ -1,7 +1,6 @@
 package com.in4qa.Purchase.Tests;
 
 import java.util.Map;
-
 import org.testng.annotations.Test;
 
 import com.in4qa.Purchase.ObjectRepository.Inventory_Purchase_Order;

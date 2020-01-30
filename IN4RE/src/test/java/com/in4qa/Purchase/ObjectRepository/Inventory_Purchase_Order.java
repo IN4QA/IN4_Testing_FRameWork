@@ -291,8 +291,7 @@ public class Inventory_Purchase_Order extends Inventory_Purchase_Order_Test
 			Iterator<String> it = oBrowser.getWindowHandles().iterator();
      	    String strchild = it.next();
      	    oBrowser.switchTo().window(strchild);
-     	    System.out.println("Window Name"+strchild);
-     	    
+     	    System.out.println("Window Name"+strchild);  
      	    appInd.clickObject(PurchaseObj.getSupplierName());
      	    SupplierName.sendKeys("1 Deepak Test");// supplier
      	    appInd.clickObject(PurchaseObj.getSupplierSerch());
