@@ -1,5 +1,7 @@
 package com.in4qa.Purchase.ObjectRepository;
 
+import java.util.Iterator;
+
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.WebElement;
@@ -13,6 +15,7 @@ import methods.Frames;
 public class Inventory_Purchase_Order extends Inventory_Purchase_Order_Test
 
 {
+	
 	WebDriver iDriver;
 	public Inventory_Purchase_Order(WebDriver oDriver)
 	{
@@ -47,14 +50,14 @@ public class Inventory_Purchase_Order extends Inventory_Purchase_Order_Test
 		return PO_Category_Asset;
 	}
 	
-	@FindBy(id="frmViewPOIndent_ddlProjectList")
+	@FindBy(id="frmViewPOIndent_ddlProjectList")//
 	private WebElement PO_Project;
 	public WebElement getPO_Project()
 	{
 		return PO_Project;
 	}
 	
-	@FindBy(id="frmViewPOIndent_ddlPOTypeList")
+	@FindBy(id="frmViewPOIndent_ddlPOTypeList")//
 	private WebElement PO_Type;
 	public WebElement getPO_Type()
 	{
@@ -232,8 +235,33 @@ public class Inventory_Purchase_Order extends Inventory_Purchase_Order_Test
 	{
 		return PurchaseOrders;
 	}
+	
+	
+	
+
+	@FindBy(xpath="//*[@id=\"txtSupplierName\"]") // create Indent/PO
+	private WebElement SupplierName;
+	public WebElement getSupplierName()
+	{
+		return SupplierName;
+    }
+/*
+	@FindBy(id="txtSupplierName")
+	private WebElement SupplierName;
+	public WebElement getSupplierName()
+	{
+		return SupplierName;
+	}*/
+	
+	@FindBy(id="btnSearch")
+	private WebElement SupplierSerch;
+	public WebElement getSupplierSerch()
+	{
+		return SupplierSerch;
+	}
+	
 	//---------------------Create Domestic Type PO----------------
-	public void Create_Purchase_Order_DomesticType(int i) 
+	public void Create_Purchase_Order_DomesticType(int i) throws Throwable 
 	{
 		try
 		{
@@ -243,29 +271,52 @@ public class Inventory_Purchase_Order extends Inventory_Purchase_Order_Test
 			appInd.clickObject(PurchaseObj.getPurchaseOrders());
 			Frames.rightFrame();
 			appInd.clickObject(PurchaseObj.getCreatePurchase_order());
-			appInd.clickObject(PurchaseObj.getPO_Category_Material());
-			appInd.selectDropDown(PurchaseObj.getPO_Project(),purmap.get("Project")+i);
-			appInd.selectDropDown(PurchaseObj.getPO_Type(),purmap.get("PO Type")+i);
+			
+			if(datatable.getCellData(strFile, "Create_PO", "Material", i).equalsIgnoreCase("yes"))
+		    {
+			appInd.clickObject(PurchaseObj.getPO_Category_Material());			
+		    }
+	    	else
+		    {
+			appInd.clickObject(PurchaseObj.getPO_CategoryAsset());		
+		    }
+			
+			Thread.sleep(500);
+			appInd.selectDropDown(PurchaseObj.getPO_Type(), purmap.get("PO Type"+i));
+		    appInd.clickObject(PurchaseObj.getPO_Project());
+		    PO_Project.sendKeys("Enhancement Project, Bangalore");
+			//appInd.selectDropDown(PurchaseObj.getPO_Project(), purmap.get("Project"+i));
 		    appInd.clickOnCalender(PurchaseObj.getPO_date(),PurchaseObj.getPO_Calender_Month(), purmap.get("month"+i),PurchaseObj.getPO_Calender_Year(), purmap.get("year"+i),purmap.get("date"+i));
-			Thread.sleep(200);
 			appInd.clickObject(PurchaseObj.getSelect_Supplier());
+			Iterator<String> it = oBrowser.getWindowHandles().iterator();
+     	    String strchild = it.next();
+     	    oBrowser.switchTo().window(strchild);
+     	    System.out.println("Window Name"+strchild);
+     	    Frames.tabFrame();
+     	    appInd.clickObject(PurchaseObj.getSupplierName());
+     	    SupplierName.sendKeys("1 Deepak Test");// supplier
+     	    appInd.clickObject(PurchaseObj.getSupplierSerch());
 			appInd.clickObject(PurchaseObj.getAddSupplier());
+			/*String strParent =it.next();
+		    oBrowser.switchTo().window(strParent);
 			appInd.clickObject(PurchaseObj.getAddIndent());
-			appInd.selectDropDown(PurchaseObj.getSubProject(),purmap.get("SubProject"+i));
+			oBrowser.switchTo().window(strchild);
+			appInd.selectDropDown(PurchaseObj.getSubProject(), purmap.get("SubProject"+i));
 			appInd.clickObject(PurchaseObj.getSearch());
 			appInd.clickObject(PurchaseObj.getSelectIndentChkBox());
 			appInd.clickObject(PurchaseObj.getAceeptSelected());
+		    Frames.rightFrame();
 			appInd.clickObject(PurchaseObj.getPO_Create());
-			
-					
-				
-				
+				*/
 		}
 				
 			  
 			
 		catch(Exception e)
-		{}
+		{
+			System.out.println(e);
+		}
+		
 }
 
 
