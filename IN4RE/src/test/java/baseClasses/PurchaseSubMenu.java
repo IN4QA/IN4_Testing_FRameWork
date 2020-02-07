@@ -38,10 +38,10 @@ public class PurchaseSubMenu extends DriverScript
 		appInd.clickObject(purchaseSubMenu.getInventory());
 	}
 	
-/*	public void clickPurchaseOrder() throws Exception
+    public void clickPurchaseOrder() throws Exception
 	{
 		Frames.SubMenuFrame();
 		appInd.clickObject(purchaseSubMenu.getPurchaseOrders());
-	}*/
+	}
 	
 }

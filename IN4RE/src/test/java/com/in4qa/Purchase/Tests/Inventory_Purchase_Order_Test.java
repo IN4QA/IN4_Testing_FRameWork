@@ -18,7 +18,8 @@ public class Inventory_Purchase_Order_Test extends DriverScript
 	{
 		int rows=0;
 		try
-		{
+		{   
+			
 			strFile="./TestData/Purchase/PurchaseOrder.xlsx";
 			PurchaseObj = new Inventory_Purchase_Order(oBrowser);
 			purmap = datatable.getDataFromExcel(strFile, "Create_PO");
