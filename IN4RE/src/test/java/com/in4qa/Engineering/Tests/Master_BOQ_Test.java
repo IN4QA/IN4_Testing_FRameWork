@@ -16,7 +16,7 @@ public class Master_BOQ_Test extends DriverScript
 	public static String strFile;
 	public static Map<String, String> purmap= null;
 	@Test
-	public void create_BOQ()
+	public void create_BOQ() throws Throwable
 	{
 		int rows =0;
 		try

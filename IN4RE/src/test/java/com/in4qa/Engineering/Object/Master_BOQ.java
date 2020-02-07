@@ -91,14 +91,14 @@ public class Master_BOQ extends Master_BOQ_Test
 		return BOQ_Name;
 	}
 	
-	@FindBy(id ="txtBOQDescription")
+	@FindBy(id ="txtBOQDescription")//txtBOQDescription
 	private WebElement BOQ_Description;
 	public WebElement getBOQ_Description()
 	{
 		return BOQ_Description;
 	}
 	
-	@FindBy(id ="txtBOQDescription")
+	@FindBy(id ="ddlUOM")//gvMaterials_ctl02_ddlUOM
 	private WebElement BOQ_UOM;
 	public WebElement getBOQ_UOM()
 	{
@@ -140,6 +140,14 @@ public class Master_BOQ extends Master_BOQ_Test
 		return MaterilType;
 	}
 	
+	
+	@FindBy(id ="ddlMaterialSubtype")
+	private WebElement MaterilSUBType;
+	public WebElement getMaterilSUBType()
+	{
+		return MaterilSUBType;
+	}
+	
 	@FindBy(id ="btnSearch")
 	private WebElement Search;
 	public WebElement getSearch()
@@ -177,15 +185,173 @@ public class Master_BOQ extends Master_BOQ_Test
 	}
 	
 	
+
+	@FindBy(id ="gvMaterials_ctl02_ddlUOM")//
+	private WebElement BOQMaterialUOM;
+	public WebElement getBOQMaterialUOM()
+	{
+		return BOQMaterialUOM;
+	}
+	
+	
+
+	@FindBy(id ="gvMaterials_ctl02_txtCostCoEff")
+	private WebElement CoEfficientFactor;
+	public WebElement getCoEfficientFactor()
+	{
+		return CoEfficientFactor;
+	}
+	
+	@FindBy(id ="gvAssets_ctl02_txtCostCoEff")
+	private WebElement Asset_CoEfficientFactor;
+	public WebElement getAsset_CoEfficientFactor()
+	{
+		return Asset_CoEfficientFactor;
+	}
+	
+	@FindBy(id ="gvMaterials_ctl02_txtCostEstQty")
+	private WebElement EstimatedQty;
+	public WebElement getEstimatedQty()
+	{
+		return EstimatedQty;
+	}
+	
+	@FindBy(id ="gvAssets_ctl02_txtCostEstQty")
+	private WebElement AssetEstimatedQty;
+	public WebElement getAssetEstimatedQty()
+	{
+		return AssetEstimatedQty;
+	}
+	
+	@FindBy(id ="gvMaterials_ctl01_chkHeader")
+	private WebElement SelectALLChk;
+	public WebElement getSelectALLChk()
+	{
+		return SelectALLChk;
+	}
+	
+
+	@FindBy(id ="gvAssets_ctl01_chkHeader")
+	private WebElement AssetSelectALLChk;
+	public WebElement getAssetSelectALLChk()
+	{
+		return AssetSelectALLChk;
+	}
+	
+	@FindBy(id ="lbnChangeStatus")//lbnChangeStatus
+	private WebElement ChangeStatus;
+	public WebElement getChangeStatus()
+	{
+		return ChangeStatus;
+	}
+	
+	@FindBy(id ="ddlStatus")
+	private WebElement SelectStatus;
+	public WebElement getSelectStatus()
+	{
+		return SelectStatus;
+	}
+	
+	
+	@FindBy(id ="lbnUpdateStatus")
+	private WebElement UpdateStatus;
+	public WebElement getUpdateStatus()
+	{
+		return UpdateStatus;
+	}
+	
+
+	@FindBy(id ="imbAssets")
+	private WebElement click_Asset;
+	public WebElement getclick_Asset()
+	{
+		return click_Asset;
+	}
+	
+	@FindBy(id ="lbnAddAssetNew")
+	private WebElement Add_Asset;
+	public WebElement getAdd_Asset()
+	{
+		return Add_Asset;
+	}
+	
+//--------------------------------------------------------------------------------------	
 	public void clickMaster() throws Exception         // click on master
 	{
 		Frames.SubMenuFrame();
 		appInd.clickObject(BOQObj.getMasters());
+    }
+	
+//----------------------------------AddAsset----------------------------------------------------	
+	
+	
+	public boolean AddAsset(int i) throws Throwable
+	{
+        try
+          {
+        	appInd.clickObject(BOQObj.getclick_Asset());
+        	appInd.clickObject(BOQObj.getAdd_Asset());
+        	String MainWindow=oBrowser.getWindowHandle();		
+		    Iterator<String> it2 = oBrowser.getWindowHandles().iterator();
+     	    String strchild = it2.next(); 	
+		    while(it2.hasNext())			
+            {		
+              String ChildWindow=it2.next();			 
+            if(!MainWindow.equalsIgnoreCase(ChildWindow))			
+           
+            { 
+            	oBrowser.switchTo().window(ChildWindow);
+	         
+	            appInd.selectDropDown(BOQObj.getMaterilType(),purmap.get("Asset Type"+i));
+	            appInd.selectDropDown(BOQObj.getMaterilSUBType(),purmap.get("Asset Sub Type"+i));
+	            appInd.clickObject(BOQObj.getSearch());
+	            appInd.clickObject(BOQObj.getChkBoxAllMaterial());
+	            appInd.clickObject(BOQObj.getAcceptSelected());
+            }
+        } 
+		    
+        	
+        }catch(Exception e)
+        {
+        	System .out.println(e);
+        }
+		
+		
+		return true;
 	}
+	
+	
+	
+	public boolean AddMaterial(int i) throws Throwable
+	{
+	
+	
+	    String MainWindow=oBrowser.getWindowHandle();		
+	    Iterator<String> it2 = oBrowser.getWindowHandles().iterator();
+ 	    String strchild = it2.next(); 	
+	    while(it2.hasNext())			
+        {		
+          String ChildWindow=it2.next();			 
+        if(!MainWindow.equalsIgnoreCase(ChildWindow))			
+       
+        { 
+        	oBrowser.switchTo().window(ChildWindow);
+         
+            appInd.selectDropDown(BOQObj.getMaterilType(),purmap.get("Material Type"+i));
+            appInd.selectDropDown(BOQObj.getMaterilSUBType(),purmap.get("Material Sub Type"+i));
+            appInd.clickObject(BOQObj.getSearch());
+            appInd.clickObject(BOQObj.getChkBoxAllMaterial());
+            appInd.clickObject(BOQObj.getAcceptSelected());
+        }}
+		
+		return true;
+	}
+	
+	
 //---------------------------------Create BOQ-------------------------------------------------	
 
 
-public void create_BOQ (int i)
+public void create_BOQ (int i) throws Throwable
 { 
 	try 
 	{
@@ -196,65 +362,101 @@ public void create_BOQ (int i)
 		BOQObj.click_BOQ();
 		Frames.rightFrame();
 		appInd.clickObject(BOQObj.Create_BOQ);
-		Frames.rightFrame();
-		Thread.sleep(500);
 		appInd.selectDropDown(BOQObj.getProject(),purmap.get("Project"+i));
+		Thread.sleep(100);
 		appInd.selectDropDown(BOQObj.getSubProject(),purmap.get("SubProject"+i));
+		Thread.sleep(200);
 		appInd.selectDropDown(BOQObj.getWorkCategory(),purmap.get("Category"+i));
+		Thread.sleep(200);
 		appInd.selectDropDown(BOQObj.getSubCategory(),purmap.get("SubCategory"+i));
-		appInd.selectDropDown(BOQObj.getBOQ_Name(),purmap.get("BOQ Name"+i));
-		appInd.selectDropDown(BOQObj.getBOQ_Description(),purmap.get("BOQ_Description")+i);
-		appInd.selectDropDown(BOQObj.getBOQ_Quantity(),purmap.get("BOQ Quantity"+i));
-		appInd.selectDropDown(BOQObj.getBOQ_Rate(),purmap.get("BOQ Rate"+i));
-		
-		appInd.clickObject(BOQObj.getclick_Material());
-		appInd.clickObject(BOQObj.getAdd_Material());
-		
-		 Iterator<String> it = oBrowser.getWindowHandles().iterator();
-	     String strchild = it.next();
-	     oBrowser.switchTo().window(strchild);
-	     
-	     if(datatable.getCellData(strFile, "Create_BOQ", "Material", i).equalsIgnoreCase("yes"))
-	        {
-     	      appInd.selectDropDown(BOQObj.getMaterilType(),purmap.get("Materil Type"+ i));
-     	    }
-	        
-	        else
-	        {
-	         appInd.selectDropDown(BOQObj.getMaterilType(),purmap.get(" Asset Type "+ i));
-	        }		        
-	        Thread.sleep(200);
-	        appInd.clickObject(BOQObj.getSearch());
-	        appInd.clickObject(BOQObj.getChkBoxAllMaterial());
-	        appInd.clickObject(BOQObj.getAcceptSelected());
-	        String strParent = it.next();
-	        oBrowser.switchTo().window(strParent);
-	        appInd.clickObject(BOQObj.getCreate());
-	        
-            
 	
+		appInd.clickObject(BOQObj.getBOQ_Name());
+		BOQ_Name.sendKeys("BOQ DEMO1");
+		
+		appInd.clickObject(BOQObj.getBOQ_Description());
+		BOQ_Description.sendKeys("BOQ DEMO");
+		
+		appInd.selectDropDown(BOQObj.getBOQ_UOM(),purmap.get("UOM"+i));
+		
+		appInd.clickObject(BOQObj.getBOQ_Quantity());
+	//	BOQ_Quantity.clear();
+		BOQ_Quantity.sendKeys("100");// boq qty
+		
+		appInd.clickObject(BOQObj.getBOQ_Rate());
+		Thread.sleep(100);
+		getBOQ_Rate().clear();
+		BOQ_Rate.sendKeys("2");  //BOQ Rate
+		
+
+		//appInd.clickObject(BOQObj.getclick_Material());
+		
+		if(datatable.getCellData(strFile, "Create BOQ", "Material", i).equalsIgnoreCase("yes"))
+	    {
+			appInd.clickObject(BOQObj.getclick_Material());			
+		    appInd.clickObject(BOQObj.getAdd_Material());
+		    if(BOQObj.AddMaterial(i))
+		    {
+         
+		
+	            Iterator<String> it3 = oBrowser.getWindowHandles().iterator();
+	            String strParent = it3.next();
+	            oBrowser.switchTo().window(strParent);
+	            Frames.rightFrame();
+	            
+	            appInd.clickObject(BOQObj.getSelectALLChk());
+	            appInd.selectDropDown(BOQObj.getBOQMaterialUOM(),purmap.get("Material UOM"+i));
+	            appInd.clickObject(BOQObj.getCoEfficientFactor());
+	            CoEfficientFactor.clear();
+	            CoEfficientFactor.sendKeys("1");
+	            
+	            appInd.clickObject(BOQObj.getEstimatedQty());
+	            EstimatedQty.clear();
+	            EstimatedQty.sendKeys("100");
+	            
+		    }}     
+	    
+		else
+	         {
+		       if(BOQObj.AddAsset(i));	
+		        {
+
+		           Iterator<String> it3 = oBrowser.getWindowHandles().iterator();
+	               String strParent = it3.next();
+	               oBrowser.switchTo().window(strParent);
+	               Frames.rightFrame();
+	            
+	               
+	               appInd.clickObject(BOQObj.getAsset_CoEfficientFactor());
+	               Asset_CoEfficientFactor.clear();
+	               Asset_CoEfficientFactor.sendKeys("1");
+	               Thread.sleep(1000);
+	               appInd.clickObject(BOQObj.getAssetSelectALLChk());
+	          
+	              /* appInd.clickObject(BOQObj.getAssetEstimatedQty());     
+	               AssetEstimatedQty.clear();
+	               AssetEstimatedQty.sendKeys("100")*/;
+	            
+			  }
+	      }
+		 appInd.clickObject(BOQObj.getCreate());
+		 appInd.clickObject(BOQObj.getChangeStatus());
+         appInd.clickObject(BOQObj.getSelectStatus());
+         SelectStatus.sendKeys("Submitted");
+         Thread.sleep(500);
+         appInd.clickObject(BOQObj.getUpdateStatus());
+         
+         appInd.clickObject(BOQObj.getChangeStatus());
+         appInd.clickObject(BOQObj.getSelectStatus());
+         SelectStatus.sendKeys("Approved");
+         Thread.sleep(500);
+         appInd.clickObject(BOQObj.getUpdateStatus());
+     
 	}
 	catch(Exception e)
 {
 System.out.println(e);		
 }
-}
+
+}}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
